@@ -16,7 +16,7 @@ extension DeeplinkParser {
             return [
                 HomeScreen().eraseToAnyScreen(),
                 DetailScreen(id: Int(id), train: nil).eraseToAnyScreen(),
-                CapacityScreen(capacity: 3).eraseToAnyScreen(),
+                CapacityScreen(capacity: nil, trainId: Int(id)).eraseToAnyScreen(),
             ]
         }
     )

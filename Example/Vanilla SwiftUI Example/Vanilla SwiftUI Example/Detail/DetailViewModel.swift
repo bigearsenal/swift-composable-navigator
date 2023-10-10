@@ -23,7 +23,10 @@ final class DetailViewModel: ObservableObject {
     // MARK: - Methods
 
     func load() async throws {
-        try? await Task.sleep(nanoseconds: 1_000_000_000)
-        train = trains.first(where: { $0.id == id })
+        try? await Task.sleep(nanoseconds: 500_000_000)
+
+        await MainActor.run {
+            train = trains.first(where: { $0.id == id })
+        }
     }
 }

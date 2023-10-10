@@ -47,7 +47,10 @@ struct DetailView: View {
                 Button(
                     action: {
                         navigator.go(
-                            to: CapacityScreen(capacity: train.capacity),
+                            to: CapacityScreen(
+                                capacity: train.capacity,
+                                trainId: train.id
+                            ),
                             on: currentScreen
                         )
                     },
@@ -58,6 +61,9 @@ struct DetailView: View {
             }
         }
         .navigationTitle(viewModel.train?.name ?? "Loading")
+        .task {
+            try? await viewModel.load()
+        }
     }
 }
 
