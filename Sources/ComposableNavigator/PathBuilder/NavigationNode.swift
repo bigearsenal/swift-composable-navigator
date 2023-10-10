@@ -43,6 +43,10 @@ public struct NavigationNode<Content: View, Successor: View>: View {
                 item: sheetBinding,
                 content: build(successor:)
             )
+            .fullScreenCover(
+                item: fullScreenCoverBinding,
+                content: build(successor:)
+            )
             .overlay(
                 NavigationLink(
                     destination: push.flatMap(build(successor:)),
@@ -138,6 +142,37 @@ public struct NavigationNode<Content: View, Successor: View>: View {
         )
     }
 
+    private var fullScreenCoverBinding: Binding<SuccessorView?> {
+        Binding(
+            get: { () -> SuccessorView? in
+                guard case .some(.fullScreenCover) = successorView?.presentationStyle,
+                      screen?.hasAppeared ?? false
+                else {
+                    return nil
+                }
+
+                return successorView
+            },
+            set: { value in
+                if let screen = screen, !screen.hasAppeared {
+                    DispatchQueue.main.async {
+                        navigator.didAppear(id: screenID)
+                    }
+                }
+
+                guard value == nil,
+                      let successor = successorView?.pathElement,
+                      successor.hasAppeared
+                else {
+                    return
+                }
+
+                if treatSheetDismissAsAppearInPresenter { onAppear(false) }
+                navigator.dismiss(id: successor.id)
+            }
+        )
+    }
+
     @ViewBuilder private func build(successor: SuccessorView) -> some View {
         let content = successor
             .environment(\.parentScreenID, screenID)
@@ -159,6 +194,12 @@ public struct NavigationNode<Content: View, Successor: View>: View {
                 }
                 .if(presentationDetent != nil) { view in
                     view.presentationDetents(presentationDetent!)
+                }
+        case let .fullScreenCover(allowsPush):
+            content
+                .if(allowsPush) { content in
+                    NavigationView { content }
+                        .navigationViewStyle(StackNavigationViewStyle())
                 }
         }
     }
