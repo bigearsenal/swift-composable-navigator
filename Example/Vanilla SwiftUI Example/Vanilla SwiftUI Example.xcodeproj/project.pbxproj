@@ -3,10 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BB717082AD4F85E00F24D28 /* DeeplinkParsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB717072AD4F85E00F24D28 /* DeeplinkParsers.swift */; };
+		3BB7170B2AD4F88700F24D28 /* DeeplinkParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7170A2AD4F88700F24D28 /* DeeplinkParser.swift */; };
+		3BB7170E2AD4F99700F24D28 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7170D2AD4F99700F24D28 /* DetailViewModel.swift */; };
+		3BB717102AD4FC4800F24D28 /* ComposableDeeplinking in Frameworks */ = {isa = PBXBuildFile; productRef = 3BB7170F2AD4FC4800F24D28 /* ComposableDeeplinking */; };
 		527E31E527066754005BDCFE /* ComposableNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 527E31E427066754005BDCFE /* ComposableNavigator */; };
 		E04E139925F7CC560080D76C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04E139825F7CC560080D76C /* Assets.xcassets */; };
 		E04E139C25F7CC560080D76C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E04E139B25F7CC560080D76C /* Preview Assets.xcassets */; };
@@ -31,6 +35,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3BB717072AD4F85E00F24D28 /* DeeplinkParsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkParsers.swift; sourceTree = "<group>"; };
+		3BB7170A2AD4F88700F24D28 /* DeeplinkParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeeplinkParser.swift; sourceTree = "<group>"; };
+		3BB7170D2AD4F99700F24D28 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		E04E139125F7CC550080D76C /* Vanilla SwiftUI Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Vanilla SwiftUI Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E04E139825F7CC560080D76C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E04E139B25F7CC560080D76C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -48,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BB717102AD4FC4800F24D28 /* ComposableDeeplinking in Frameworks */,
 				527E31E527066754005BDCFE /* ComposableNavigator in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +63,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BB717092AD4F87700F24D28 /* Deeplink */ = {
+			isa = PBXGroup;
+			children = (
+				3BB717072AD4F85E00F24D28 /* DeeplinkParsers.swift */,
+				3BB7170A2AD4F88700F24D28 /* DeeplinkParser.swift */,
+			);
+			path = Deeplink;
+			sourceTree = "<group>";
+		};
+		3BB7170C2AD4F98C00F24D28 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				E04E13A725F7CCA90080D76C /* DetailView.swift */,
+				3BB7170D2AD4F99700F24D28 /* DetailViewModel.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
 		E04E138825F7CC550080D76C = {
 			isa = PBXGroup;
 			children = (
@@ -76,10 +102,11 @@
 			isa = PBXGroup;
 			children = (
 				E04E13A425F7CCA90080D76C /* CapacityView.swift */,
-				E04E13A725F7CCA90080D76C /* DetailView.swift */,
+				3BB7170C2AD4F98C00F24D28 /* Detail */,
 				E04E13A525F7CCA90080D76C /* HomeView.swift */,
 				E04E13A625F7CCA90080D76C /* Train.swift */,
 				E04E13A825F7CCA90080D76C /* Vanilla_ExampleApp.swift */,
+				3BB717092AD4F87700F24D28 /* Deeplink */,
 				E04E139825F7CC560080D76C /* Assets.xcassets */,
 				E04E139D25F7CC560080D76C /* Info.plist */,
 				E04E139A25F7CC560080D76C /* Preview Content */,
@@ -122,6 +149,7 @@
 			name = "Vanilla SwiftUI Example";
 			packageProductDependencies = (
 				527E31E427066754005BDCFE /* ComposableNavigator */,
+				3BB7170F2AD4FC4800F24D28 /* ComposableDeeplinking */,
 			);
 			productName = "Vanilla SwiftUI Example";
 			productReference = E04E139125F7CC550080D76C /* Vanilla SwiftUI Example.app */;
@@ -177,11 +205,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BB7170B2AD4F88700F24D28 /* DeeplinkParser.swift in Sources */,
+				3BB717082AD4F85E00F24D28 /* DeeplinkParsers.swift in Sources */,
 				E04E13AA25F7CCA90080D76C /* CapacityView.swift in Sources */,
 				E04E13AE25F7CCA90080D76C /* Vanilla_ExampleApp.swift in Sources */,
 				E04E13AD25F7CCA90080D76C /* DetailView.swift in Sources */,
 				E04E13AC25F7CCA90080D76C /* Train.swift in Sources */,
 				E04E13AB25F7CCA90080D76C /* HomeView.swift in Sources */,
+				3BB7170E2AD4F99700F24D28 /* DetailViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -315,7 +346,7 @@
 				DEVELOPMENT_TEAM = 7NCQKR5AT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Vanilla SwiftUI Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -339,7 +370,7 @@
 				DEVELOPMENT_TEAM = 7NCQKR5AT8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Vanilla SwiftUI Example/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -375,6 +406,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		3BB7170F2AD4FC4800F24D28 /* ComposableDeeplinking */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ComposableDeeplinking;
+		};
 		527E31E427066754005BDCFE /* ComposableNavigator */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableNavigator;

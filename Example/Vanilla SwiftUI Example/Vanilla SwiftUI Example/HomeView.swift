@@ -28,7 +28,7 @@ struct HomeView: View {
                     Button(
                         action: {
                             navigator.go(
-                                to: DetailScreen(train: train),
+                                to: DetailScreen(id: train.id, train: train),
                                 on: currentScreen
                             )
                         },
