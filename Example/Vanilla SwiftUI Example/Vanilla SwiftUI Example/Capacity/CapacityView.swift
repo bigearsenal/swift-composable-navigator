@@ -4,7 +4,10 @@ import SwiftUI
 struct CapacityScreen: Screen {
     let capacity: Int?
     let trainId: Int?
-    var presentationStyle: ScreenPresentationStyle = .sheet(allowsPush: true)
+    var presentationStyle: ScreenPresentationStyle = .sheet(
+        allowsPush: false,
+        presentationDetent: [.fraction(2.0 / 3)]
+    )
 
     struct Builder: NavigationTree {
         var builder: some PathBuilder {
