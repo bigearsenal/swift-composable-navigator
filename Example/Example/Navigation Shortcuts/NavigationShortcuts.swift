@@ -63,7 +63,7 @@ struct NavigationShortcuts: View {
                         DetailScreen(detailID: "0").eraseToAnyScreen(),
                         SettingsScreen().eraseToAnyScreen(),
                         NavigationShortcutsScreen(
-                            presentationStyle: .sheet(allowsPush: true)
+                          presentationStyle: .sheet(allowsPush: true, presentationDetents: [.fraction(2/3)])
                         ).eraseToAnyScreen(),
                     ]
                 )
