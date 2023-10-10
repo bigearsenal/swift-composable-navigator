@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -20,10 +20,10 @@ let testGybFiles = [
 let package = Package(
     name: "swift-composable-navigator",
     platforms: [
-        .iOS(.v13),
-        .macOS(.v10_15),
-        .tvOS(.v13),
-        .watchOS(.v6),
+        .iOS(.v16),
+        .macOS(.v14),
+        .tvOS(.v17),
+        .watchOS(.v10),
     ],
     products: [
         .library(
@@ -46,7 +46,11 @@ let package = Package(
             from: "0.7.0"
         ),
         .package(url: "https://github.com/shibapm/Rocket", from: "1.1.0"), // dev
-        .package(name: "SnapshotTesting", url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.8.2"), // dev
+        .package(
+            name: "SnapshotTesting",
+            url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
+            from: "1.8.2"
+        ), // dev
     ],
     targets: [
         .target(
@@ -73,9 +77,17 @@ let package = Package(
                 .target(name: "ComposableNavigator"),
             ]
         ),
-        .testTarget(name: "ComposableNavigatorTests", dependencies: ["ComposableNavigator", "SnapshotTesting"], exclude: testGybFiles + snapshotFolders), // dev
+        .testTarget(
+            name: "ComposableNavigatorTests",
+            dependencies: ["ComposableNavigator", "SnapshotTesting"],
+            exclude: testGybFiles + snapshotFolders
+        ), // dev
         .testTarget(name: "ComposableDeeplinkingTests", dependencies: ["ComposableDeeplinking"]), // dev
-        .testTarget(name: "ComposableNavigatorTCATests", dependencies: ["ComposableNavigatorTCA", "SnapshotTesting"], exclude: tcaSnapshotFolders), // dev
+        .testTarget(
+            name: "ComposableNavigatorTCATests",
+            dependencies: ["ComposableNavigatorTCA", "SnapshotTesting"],
+            exclude: tcaSnapshotFolders
+        ), // dev
     ]
 )
 
