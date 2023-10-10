@@ -43,9 +43,9 @@ let package = Package(
         .package(
             name: "swift-composable-architecture",
             url: "https://github.com/pointfreeco/swift-composable-architecture",
-            from: "0.7.0"
+            from: "1.2.0"
         ),
-        .package(url: "https://github.com/shibapm/Rocket", from: "1.1.0"), // dev
+        .package(url: "https://github.com/shibapm/Rocket", from: "1.3.0"), // dev
         .package(
             name: "SnapshotTesting",
             url: "https://github.com/pointfreeco/swift-snapshot-testing.git",
