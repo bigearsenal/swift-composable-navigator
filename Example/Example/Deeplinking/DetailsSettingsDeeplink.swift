@@ -15,7 +15,7 @@ extension DeeplinkParser {
             return [
                 HomeScreen().eraseToAnyScreen(),
                 DetailScreen(detailID: id).eraseToAnyScreen(),
-                SettingsScreen().eraseToAnyScreen()
+                SettingsScreen().eraseToAnyScreen(),
             ]
         }
     )

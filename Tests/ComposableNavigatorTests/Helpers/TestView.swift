@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct TestView: View, Equatable {
-  let id: Int
-  
-  var body: some View {
-    Color.red
-  }
+    let id: Int
 
-  static func ==(lhs: Self, rhs: Self) -> Bool {
-    lhs.id == rhs.id
-  }
+    var body: some View {
+        Color.red
+    }
+
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        lhs.id == rhs.id
+    }
 }

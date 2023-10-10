@@ -5,134 +5,136 @@ import SwiftUI
 import XCTest
 
 final class PathBuilder_IfLetStoreTests: XCTestCase {
-  // MARK: - ifLet
-  func test_ifLet_builds_then_builder_with_unwrapped_store_if_state_initialised() {
-    var innerBuildCalled = false
+    // MARK: - ifLet
 
-    let store = Store<Optional<Int>, Void>(
-      initialState: 0,
-      reducer: .empty,
-      environment: ()
-    )
+    func test_ifLet_builds_then_builder_with_unwrapped_store_if_state_initialised() {
+        var innerBuildCalled = false
 
-    let expectedPath = TestScreen().asPathElement()
+        let store = Store<Int?, Void>(
+            initialState: 0,
+            reducer: .empty,
+            environment: ()
+        )
 
-    let sut = PathBuilders.ifLetStore(
-      store: store,
-      then: { store in
-        _PathBuilder { pathElement -> EmptyView? in
-          XCTAssertEqual(expectedPath, pathElement)
-          XCTAssertEqual(ViewStore(store).state, 0)
-          innerBuildCalled = true
-          return EmptyView()
-        }
-      }
-    )
+        let expectedPath = TestScreen().asPathElement()
 
-    XCTAssertNotNil(sut.build(pathElement: expectedPath))
-    XCTAssertTrue(innerBuildCalled)
-  }
+        let sut = PathBuilders.ifLetStore(
+            store: store,
+            then: { store in
+                _PathBuilder { pathElement -> EmptyView? in
+                    XCTAssertEqual(expectedPath, pathElement)
+                    XCTAssertEqual(ViewStore(store).state, 0)
+                    innerBuildCalled = true
+                    return EmptyView()
+                }
+            }
+        )
 
-  func test_ifLet_builds_nil_if_state_nil() {
-    var innerBuildCalled = false
+        XCTAssertNotNil(sut.build(pathElement: expectedPath))
+        XCTAssertTrue(innerBuildCalled)
+    }
 
-    let store = Store<Optional<Int>, Void>(
-      initialState: nil,
-      reducer: .empty,
-      environment: ()
-    )
+    func test_ifLet_builds_nil_if_state_nil() {
+        var innerBuildCalled = false
 
-    let expectedPath = TestScreen().asPathElement()
+        let store = Store<Int?, Void>(
+            initialState: nil,
+            reducer: .empty,
+            environment: ()
+        )
 
-    let sut = PathBuilders.ifLetStore(
-      store: store,
-      then: { store in
-        _PathBuilder { pathElement -> EmptyView? in
-          innerBuildCalled = true
-          return EmptyView()
-        }
-      }
-    )
+        let expectedPath = TestScreen().asPathElement()
 
-    XCTAssertNil(sut.build(pathElement: expectedPath))
-    XCTAssertFalse(innerBuildCalled)
-  }
+        let sut = PathBuilders.ifLetStore(
+            store: store,
+            then: { _ in
+                _PathBuilder { _ -> EmptyView? in
+                    innerBuildCalled = true
+                    return EmptyView()
+                }
+            }
+        )
 
-  // MARK: - ifLet else
-  func test_ifLetElse_builds_then_builder_with_unwrapped_store_if_state_initialised() {
-    let store = Store<Optional<Int>, Void>(
-      initialState: 0,
-      reducer: .empty,
-      environment: ()
-    )
+        XCTAssertNil(sut.build(pathElement: expectedPath))
+        XCTAssertFalse(innerBuildCalled)
+    }
 
-    var thenBuilderInvocations = [NavigationPathElement]()
-    var elseBuilderInvocations = [NavigationPathElement]()
+    // MARK: - ifLet else
 
-    let expectedPath =  TestScreen().asPathElement()
+    func test_ifLetElse_builds_then_builder_with_unwrapped_store_if_state_initialised() {
+        let store = Store<Int?, Void>(
+            initialState: 0,
+            reducer: .empty,
+            environment: ()
+        )
 
-    let expectedThenBuilderInvocations = [
-      expectedPath
-    ]
+        var thenBuilderInvocations = [NavigationPathElement]()
+        var elseBuilderInvocations = [NavigationPathElement]()
 
-    let expectedElseBuilderInvocations = [NavigationPathElement]()
+        let expectedPath = TestScreen().asPathElement()
 
-    let sut = PathBuilders.ifLetStore(
-      store: store,
-      then: { store in
-        _PathBuilder { pathElement -> EmptyView? in
-          XCTAssertEqual(ViewStore(store).state, 0)
+        let expectedThenBuilderInvocations = [
+            expectedPath,
+        ]
 
-          thenBuilderInvocations.append(pathElement)
+        let expectedElseBuilderInvocations = [NavigationPathElement]()
 
-          return EmptyView()
-        }
-      },
-      else: _PathBuilder { pathElement -> EmptyView? in
-        elseBuilderInvocations.append(pathElement)
-        return EmptyView()
-      }
-    )
+        let sut = PathBuilders.ifLetStore(
+            store: store,
+            then: { store in
+                _PathBuilder { pathElement -> EmptyView? in
+                    XCTAssertEqual(ViewStore(store).state, 0)
 
-    XCTAssertNotNil(sut.build(pathElement: expectedPath))
-    XCTAssertEqual(expectedThenBuilderInvocations, thenBuilderInvocations)
-    XCTAssertEqual(expectedElseBuilderInvocations, elseBuilderInvocations)
-  }
+                    thenBuilderInvocations.append(pathElement)
 
-  func test_ifLetElse_builds_else_builder_if_state_nil() {
-    let store = Store<Optional<Int>, Void>(
-      initialState: nil,
-      reducer: .empty,
-      environment: ()
-    )
+                    return EmptyView()
+                }
+            },
+            else: _PathBuilder { pathElement -> EmptyView? in
+                elseBuilderInvocations.append(pathElement)
+                return EmptyView()
+            }
+        )
 
-    var thenBuilderInvocations = [NavigationPathElement]()
-    var elseBuilderInvocations = [NavigationPathElement]()
+        XCTAssertNotNil(sut.build(pathElement: expectedPath))
+        XCTAssertEqual(expectedThenBuilderInvocations, thenBuilderInvocations)
+        XCTAssertEqual(expectedElseBuilderInvocations, elseBuilderInvocations)
+    }
 
-    let expectedPath = TestScreen().asPathElement()
+    func test_ifLetElse_builds_else_builder_if_state_nil() {
+        let store = Store<Int?, Void>(
+            initialState: nil,
+            reducer: .empty,
+            environment: ()
+        )
 
-    let expectedThenBuilderInvocations = [NavigationPathElement]()
+        var thenBuilderInvocations = [NavigationPathElement]()
+        var elseBuilderInvocations = [NavigationPathElement]()
 
-    let expectedElseBuilderInvocations = [
-      expectedPath
-    ]
+        let expectedPath = TestScreen().asPathElement()
 
-    let sut = PathBuilders.ifLetStore(
-      store: store,
-      then: { store in
-        _PathBuilder { pathElement -> EmptyView? in
-          thenBuilderInvocations.append(pathElement)
-          return EmptyView()
-        }
-      },
-      else: _PathBuilder { pathElement -> EmptyView? in
-        elseBuilderInvocations.append(pathElement)
-        return EmptyView()
-      }
-    )
+        let expectedThenBuilderInvocations = [NavigationPathElement]()
 
-    XCTAssertNotNil(sut.build(pathElement: expectedPath))
-    XCTAssertEqual(expectedThenBuilderInvocations, thenBuilderInvocations)
-    XCTAssertEqual(expectedElseBuilderInvocations, elseBuilderInvocations)
-  }
+        let expectedElseBuilderInvocations = [
+            expectedPath,
+        ]
+
+        let sut = PathBuilders.ifLetStore(
+            store: store,
+            then: { _ in
+                _PathBuilder { pathElement -> EmptyView? in
+                    thenBuilderInvocations.append(pathElement)
+                    return EmptyView()
+                }
+            },
+            else: _PathBuilder { pathElement -> EmptyView? in
+                elseBuilderInvocations.append(pathElement)
+                return EmptyView()
+            }
+        )
+
+        XCTAssertNotNil(sut.build(pathElement: expectedPath))
+        XCTAssertEqual(expectedThenBuilderInvocations, thenBuilderInvocations)
+        XCTAssertEqual(expectedElseBuilderInvocations, elseBuilderInvocations)
+    }
 }

@@ -4,27 +4,27 @@ import SwiftUI
 import XCTest
 
 final class RootTests: XCTestCase {
-  func test_root_wraps_content_in_navigation_view() {
-    let rootScreen = TestScreen(identifier: "0", presentationStyle: .push)
+    func test_root_wraps_content_in_navigation_view() {
+        let rootScreen = TestScreen(identifier: "0", presentationStyle: .push)
 
-    let expectedPath = rootScreen.asPathElement()
-    var onAppearCalled = false
+        let expectedPath = rootScreen.asPathElement()
+        var onAppearCalled = false
 
-    let root = Root(
-      dataSource: Navigator.Datasource(
-        root: rootScreen
-      ),
-      pathBuilder: _PathBuilder { pathElement in
-        Text("A")
-          .navigationBarTitle("Navbar title")
-          .onAppear {
-            XCTAssertEqual(expectedPath, pathElement)
-            onAppearCalled = true
-          }
-      }
-    )
+        let root = Root(
+            dataSource: Navigator.Datasource(
+                root: rootScreen
+            ),
+            pathBuilder: _PathBuilder { pathElement in
+                Text("A")
+                    .navigationBarTitle("Navbar title")
+                    .onAppear {
+                        XCTAssertEqual(expectedPath, pathElement)
+                        onAppearCalled = true
+                    }
+            }
+        )
 
-    assertSnapshot(matching: root, as: .image(layout: .device(config: .iPhone8)))
-    XCTAssertTrue(onAppearCalled)
-  }
+        assertSnapshot(matching: root, as: .image(layout: .device(config: .iPhone8)))
+        XCTAssertTrue(onAppearCalled)
+    }
 }

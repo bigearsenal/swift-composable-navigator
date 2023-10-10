@@ -1,3 +1,3 @@
-extension NavigationTree {
-  public func Empty() -> PathBuilders.EmptyBuilder { PathBuilders.empty }
+public extension NavigationTree {
+    func Empty() -> PathBuilders.EmptyBuilder { PathBuilders.empty }
 }

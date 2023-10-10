@@ -3,45 +3,45 @@ import ComposableDeeplinking
 import XCTest
 
 final class DeeplinkHandlerTests: XCTestCase {
-  func test_handle_deeplink_replaces_path_if_deeplink_resolves() {
-    let resolvedPath = [
-      TestScreen(identifier: "first", presentationStyle: .push).eraseToAnyScreen()
-    ]
+    func test_handle_deeplink_replaces_path_if_deeplink_resolves() {
+        let resolvedPath = [
+            TestScreen(identifier: "first", presentationStyle: .push).eraseToAnyScreen(),
+        ]
 
-    var replacePathInvocations = [Navigator.ReplacePathInvocation]()
-    let expectedInvocations = [
-      Navigator.ReplacePathInvocation(path: resolvedPath)
-    ]
+        var replacePathInvocations = [Navigator.ReplacePathInvocation]()
+        let expectedInvocations = [
+            Navigator.ReplacePathInvocation(path: resolvedPath),
+        ]
 
-    let sut = DeeplinkHandler(
-      navigator: Navigator.mock(
-        replacePathInvoked: { invocation in
-          replacePathInvocations.append(invocation)
-        }
-      ),
-      parser: DeeplinkParser(parse: { _ in resolvedPath })
-    )
+        let sut = DeeplinkHandler(
+            navigator: Navigator.mock(
+                replacePathInvoked: { invocation in
+                    replacePathInvocations.append(invocation)
+                }
+            ),
+            parser: DeeplinkParser(parse: { _ in resolvedPath })
+        )
 
-    sut.handle(deeplink: Deeplink.Stub.deeplink)
+        sut.handle(deeplink: Deeplink.Stub.deeplink)
 
-    XCTAssertEqual(expectedInvocations, replacePathInvocations)
-  }
+        XCTAssertEqual(expectedInvocations, replacePathInvocations)
+    }
 
-  func test_handle_deeplink_does_not_replace_path_if_deeplink_does_not_resolves() {
-    var replacePathInvocations = [Navigator.ReplacePathInvocation]()
-    let expectedInvocations = [Navigator.ReplacePathInvocation]()
+    func test_handle_deeplink_does_not_replace_path_if_deeplink_does_not_resolves() {
+        var replacePathInvocations = [Navigator.ReplacePathInvocation]()
+        let expectedInvocations = [Navigator.ReplacePathInvocation]()
 
-    let sut = DeeplinkHandler(
-      navigator: Navigator.mock(
-        replacePathInvoked: { invocation in
-          replacePathInvocations.append(invocation)
-        }
-      ),
-      parser: DeeplinkParser(parse: { _ in nil })
-    )
+        let sut = DeeplinkHandler(
+            navigator: Navigator.mock(
+                replacePathInvoked: { invocation in
+                    replacePathInvocations.append(invocation)
+                }
+            ),
+            parser: DeeplinkParser(parse: { _ in nil })
+        )
 
-    sut.handle(deeplink: Deeplink.Stub.deeplink)
+        sut.handle(deeplink: Deeplink.Stub.deeplink)
 
-    XCTAssertEqual(expectedInvocations, replacePathInvocations)
-  }
+        XCTAssertEqual(expectedInvocations, replacePathInvocations)
+    }
 }

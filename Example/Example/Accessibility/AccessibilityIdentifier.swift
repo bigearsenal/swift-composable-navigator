@@ -11,67 +11,67 @@ extension View {
 }
 
 extension AccessibilityIdentifier {
-  enum HomeScreen {
-    static let settingsNavigationBarItem = AccessibilityIdentifier(value: "home.settings.open")
+    enum HomeScreen {
+        static let settingsNavigationBarItem = AccessibilityIdentifier(value: "home.settings.open")
 
-    static func detail(for id: String) -> AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "detail.\(id)")
+        static func detail(for id: String) -> AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "detail.\(id)")
+        }
+
+        static func detailSettings(for id: String) -> AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "detail.\(id).settings")
+        }
     }
 
-    static func detailSettings(for id: String) -> AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "detail.\(id).settings")
-    }
-  }
+    struct SettingsScreen {
+        let prefix: String
 
-  struct SettingsScreen {
-    let prefix: String
+        var shortcutsSheet: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).settings.shortcuts.sheet")
+        }
 
-    var shortcutsSheet: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).settings.shortcuts.sheet")
-    }
-
-    var shortcutsPush: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).settings.shortcuts.push")
-    }
-  }
-
-  struct DetailScreen {
-    let id: String
-
-    var shortcuts: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "detail.\(id).shortcuts")
+        var shortcutsPush: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).settings.shortcuts.push")
+        }
     }
 
-    var settings: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "detail.\(id).settings")
-    }
-  }
+    struct DetailScreen {
+        let id: String
 
-  struct NavigationShortcuts {
-    let prefix: String
+        var shortcuts: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "detail.\(id).shortcuts")
+        }
 
-    var detailShortcuts: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).detailShortcuts")
-    }
-
-    var detailSettings: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).detailSettings")
+        var settings: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "detail.\(id).settings")
+        }
     }
 
-    var detailSettingsShortcutsPush: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).detailSettingsShortcutsPush")
-    }
+    struct NavigationShortcuts {
+        let prefix: String
 
-    var detailSettingsShortcutsSheet: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).detailSettingsShortcutsSheet")
-    }
+        var detailShortcuts: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).detailShortcuts")
+        }
 
-    var homeSettings: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).homeSettings")
-    }
+        var detailSettings: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).detailSettings")
+        }
 
-    var home: AccessibilityIdentifier {
-      AccessibilityIdentifier(value: "\(prefix).home")
+        var detailSettingsShortcutsPush: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).detailSettingsShortcutsPush")
+        }
+
+        var detailSettingsShortcutsSheet: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).detailSettingsShortcutsSheet")
+        }
+
+        var homeSettings: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).homeSettings")
+        }
+
+        var home: AccessibilityIdentifier {
+            AccessibilityIdentifier(value: "\(prefix).home")
+        }
     }
-  }
 }

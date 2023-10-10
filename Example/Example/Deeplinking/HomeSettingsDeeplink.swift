@@ -13,7 +13,7 @@ extension DeeplinkParser {
 
             return [
                 HomeScreen().eraseToAnyScreen(),
-                SettingsScreen().eraseToAnyScreen()
+                SettingsScreen().eraseToAnyScreen(),
             ]
         }
     )

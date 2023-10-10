@@ -1,12 +1,12 @@
 public extension PathBuilders {
-  struct EmptyBuilder: PathBuilder {
-    public func build(pathElement: NavigationPathElement) -> Never? { nil }
-  }
+    struct EmptyBuilder: PathBuilder {
+        public func build(pathElement _: NavigationPathElement) -> Never? { nil }
+    }
 
-  /// The empty `PathBuilder` does not build any screen and just returns nil for all screens.
-  ///
-  /// The .empty PathBuilder can be used as a stub value.
-  static var empty: EmptyBuilder {
-    EmptyBuilder()
-  }
+    /// The empty `PathBuilder` does not build any screen and just returns nil for all screens.
+    ///
+    /// The .empty PathBuilder can be used as a stub value.
+    static var empty: EmptyBuilder {
+        EmptyBuilder()
+    }
 }
