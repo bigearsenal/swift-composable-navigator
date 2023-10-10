@@ -34,17 +34,8 @@ let package = Package(
             name: "ComposableDeeplinking",
             targets: ["ComposableDeeplinking"]
         ),
-        .library(
-            name: "ComposableNavigatorTCA",
-            targets: ["ComposableNavigatorTCA"]
-        ),
     ],
     dependencies: [
-        .package(
-            name: "swift-composable-architecture",
-            url: "https://github.com/pointfreeco/swift-composable-architecture",
-            from: "1.2.0"
-        ),
         .package(url: "https://github.com/shibapm/Rocket", from: "1.3.0"), // dev
         .package(
             name: "SnapshotTesting",
@@ -62,16 +53,6 @@ let package = Package(
             ]
         ),
         .target(
-            name: "ComposableNavigatorTCA",
-            dependencies: [
-                .target(name: "ComposableNavigator"),
-                .product(
-                    name: "ComposableArchitecture",
-                    package: "swift-composable-architecture"
-                ),
-            ]
-        ),
-        .target(
             name: "ComposableDeeplinking",
             dependencies: [
                 .target(name: "ComposableNavigator"),
@@ -83,11 +64,6 @@ let package = Package(
             exclude: testGybFiles + snapshotFolders
         ), // dev
         .testTarget(name: "ComposableDeeplinkingTests", dependencies: ["ComposableDeeplinking"]), // dev
-        .testTarget(
-            name: "ComposableNavigatorTCATests",
-            dependencies: ["ComposableNavigatorTCA", "SnapshotTesting"],
-            exclude: tcaSnapshotFolders
-        ), // dev
     ]
 )
 
