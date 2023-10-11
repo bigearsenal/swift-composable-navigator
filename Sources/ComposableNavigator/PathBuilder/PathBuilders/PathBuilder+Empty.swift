@@ -1,3 +1,5 @@
+import SwiftUI
+
 public extension PathBuilders {
     struct EmptyBuilder: PathBuilder {
         public func build(pathElement _: NavigationPathElement) -> Never? { nil }
