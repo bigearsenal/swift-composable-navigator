@@ -85,15 +85,15 @@ To programmatically navigate, we need to keep our navigation state in an Observa
 The answer to this one is simple: SwiftUI will not navigate. Imagine, we have a list of hundreds of entries that the user can scroll through. If we want to programmatically navigate to an entry detail view, the 'cell' containing the NavigationLink needs to be in memory or else the navigation will not be performed.
 
 ### NavigationLinks do not navigate when I click them<!-- omit in toc -->
-In order to make NavigationLinks work in our view, we need to wrap our view in a NavigationView.
+In order to make NavigationLinks work in our view, we need to wrap our view in a NavigationStack.
 
-So, at which point in the view hierarchy do we wrap our content in a NavigationView? As wrapping content in a NavigationView twice will lead to two navigation bars, we probably want to avoid having to multiple nested NavigationViews.
+So, at which point in the view hierarchy do we wrap our content in a NavigationStack? As wrapping content in a NavigationStack twice will lead to two navigation bars, we probably want to avoid having to multiple nested NavigationStacks.
 
 ### Shallow Deeplinking<!-- omit in toc -->
 Vanilla SwiftUI only supports shallow deeplinking, meaning that we can navigate from the ExampleView to the DetailView by setting the initial value of `isDetailShown` to true. However, we cannot navigate further down into our application as SwiftUI seems to ignore initial values in pushed/presented views.
 
 ## Why should I use ComposableNavigator?
-**ComposableNavigator** lifts the burden of manually managing navigation state off your shoulders and allows to navigate through applications along navigation paths. **ComposableNavigator** takes care of embedding your views in NavigationViews, where needed, and always builds a valid view hierarchy. On top of that, **ComposableNavigator** unlocks advanced navigation patterns like wildcards and conditional navigation paths.
+**ComposableNavigator** lifts the burden of manually managing navigation state off your shoulders and allows to navigate through applications along navigation paths. **ComposableNavigator** takes care of embedding your views in NavigationStacks, where needed, and always builds a valid view hierarchy. On top of that, **ComposableNavigator** unlocks advanced navigation patterns like wildcards and conditional navigation paths.
 
 ## Core components
 **ComposableNavigator** is built on three core components: the navigation tree, the current navigation path, and the navigator.
