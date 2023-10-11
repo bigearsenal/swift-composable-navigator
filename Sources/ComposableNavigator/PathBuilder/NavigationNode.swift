@@ -47,13 +47,9 @@ public struct NavigationNode<Content: View, Successor: View>: View {
                 item: fullScreenCoverBinding,
                 content: build(successor:)
             )
-            .overlay(
-                NavigationLink(
-                    destination: push.flatMap(build(successor:)),
-                    isActive: pushIsActive,
-                    label: { EmptyView() }
-                )
-            )
+            .navigationDestination(isPresented: pushIsActive) {
+                push.flatMap(build(successor:))
+            }
             .uiKitOnAppear {
                 if let screen = self.screen {
                     self.onAppear(!screen.hasAppeared)
@@ -189,8 +185,7 @@ public struct NavigationNode<Content: View, Successor: View>: View {
         case let .sheet(allowsPush, presentationDetent):
             content
                 .if(allowsPush) { content in
-                    NavigationView { content }
-                        .navigationViewStyle(StackNavigationViewStyle())
+                    NavigationStack { content }
                 }
                 .if(presentationDetent != nil) { view in
                     view.presentationDetents(presentationDetent!)
@@ -198,8 +193,7 @@ public struct NavigationNode<Content: View, Successor: View>: View {
         case let .fullScreenCover(allowsPush):
             content
                 .if(allowsPush) { content in
-                    NavigationView { content }
-                        .navigationViewStyle(StackNavigationViewStyle())
+                    NavigationStack { content }
                 }
         }
     }

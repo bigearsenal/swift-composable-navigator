@@ -2,7 +2,7 @@ import SwiftUI
 
 ///  Root View of any ComposableNavigator driven application
 ///
-///  Embeds the content in a `NavigationView` and builds the navigation path, whenever it changes.
+///  Embeds the content in a `NavigationStack` and builds the navigation path, whenever it changes.
 ///  ## Usage
 ///  ```swift
 ///  import ComposableNavigator
@@ -58,7 +58,7 @@ public struct Root<Builder: PathBuilder>: View {
 
     public var body: some View {
         if let rootPathComponent = dataSource.path.current.first {
-            NavigationView {
+            NavigationStack {
                 pathBuilder.build(
                     pathElement: rootPathComponent
                 )
@@ -76,7 +76,6 @@ public struct Root<Builder: PathBuilder>: View {
                 navigator
             )
             .environmentObject(dataSource)
-            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }

@@ -7,14 +7,14 @@ public enum ScreenPresentationStyle: Hashable {
 
     /// The screen is presented as a sheet,  analogous to `UIViewController.present(vc:, animated:, completion:)`
     ///
-    /// If `allowsPush:` is set to false, the sheet content is not embedded in a `NavigationView` and therefore pushes
+    /// If `allowsPush:` is set to false, the sheet content is not embedded in a `NavigationStack` and therefore pushes
     /// do not work.
     case sheet(allowsPush: Bool = true, presentationDetent: Set<PresentationDetent>? = nil)
 
     /// The screen is presented as a fullScreenCover,  analogous to `UIViewController.present(vc:, animated:,
     /// completion:)`
     ///
-    /// If `allowsPush:` is set to false, the sheet content is not embedded in a `NavigationView` and therefore pushes
+    /// If `allowsPush:` is set to false, the sheet content is not embedded in a `NavigationStack` and therefore pushes
     /// do not work.
     case fullScreenCover(allowsPush: Bool = true)
 }
